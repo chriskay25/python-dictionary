@@ -7,6 +7,10 @@ def translate(word):
     word = word.lower()
     if word in data:
         return data[word]
+    elif word.capitalize() in data:
+        return data[word.capitalize()]
+    elif word.upper() in data:
+        return data[word.upper()]
     elif len(get_close_matches(word, data.keys())) > 0:
         confirm = input('Did you mean %s? Enter "y" for yes or "n" for no.' % get_close_matches(word, data.keys())[0])
         confirm = confirm.lower()
@@ -21,4 +25,10 @@ def translate(word):
 
 word = input('Enter word: ')
 
-print(translate(word)) 
+output = translate(word)
+
+if type(output) == list:
+    for item in output:
+        print(item)
+else:
+    print(output)
